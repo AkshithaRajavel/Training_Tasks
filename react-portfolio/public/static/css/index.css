@@ -1,0 +1,133 @@
+*{
+    font-family: Sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+img{
+    max-width: 100%;
+}
+h1{
+    text-align: center;
+}
+main{
+    padding: 50px;
+}
+header{
+    color: white;
+    padding: 30px;
+    background-color: black;
+    display: flex;
+    /* position: sticky;
+    top:0;
+    z-index: 1; */
+}
+a{
+    margin: 5px;
+}
+article{
+    padding: 10px;
+}
+footer{
+    padding: 10px;
+    text-align: center;
+}
+.col{
+    border-radius: 20px;
+    background-color: rgba(128, 128, 128, 0.2);
+    margin: 20px;
+    width:25%;
+    transition-duration: 0.6s;
+    padding-bottom: 10px;
+}
+article .col:hover{
+    background-color: aliceblue;
+    transform: scale(1.1);
+}
+.about{
+    padding: 10px;
+    background-color: grey;
+}
+.project-description{
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 5px;
+    height: 20vh;
+    overflow-y: scroll;
+}
+.personal-details{
+    background-color: white;
+    color: black;
+}
+.personal-details h2{
+    text-align: center;
+}
+.personal-details div{
+    margin: 5px;
+}
+.personal-details .row{
+    justify-content: left;
+}
+.education h2{
+    text-align: center;
+}
+.education div{
+    margin: 5px;
+}
+.education .row{
+    text-align: left;
+}
+.education p{
+    color: gray;
+}
+.edu{
+    width: 70%;
+    text-align: left;
+}
+.details{
+    width: 70%;
+}
+.small-icon-div{
+    text-align: left;
+    width: 20%;
+}
+.small-icon{
+    width: 20px;
+}
+.icon{
+    max-width: 40px;
+}
+.year{
+    width: 20%;
+    text-align: right;
+}
+.education{
+    color: white;
+    background-color: black;
+}
+.row{
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.about .col{
+    border-radius: 0;
+    width: 45%;
+    margin: 5px;
+    padding: 20px;
+}
+.profile{
+    padding-left: 50px;
+    width: 50%;
+    text-align: left;
+}
+.description{
+    padding: 10px;
+    padding-right: 30px;
+    width: 50%;
+    text-align: right;
+}
+.pic{
+    height: 150px;
+    border-radius: 100px;
+}
