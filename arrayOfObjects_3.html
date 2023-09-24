@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,tr,td,th{
+            width:80%;
+            margin:auto;
+            border: 2px solid black;
+            border-spacing: 0px;  
+        }
+        td,th{
+            padding: 5px;
+            width:25%;
+        }
+        ul{
+            padding: 15px;
+        }
+        form{
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="addPerson(event)">
+        <h1>Enter Details</h1>
+        <label for="Name"><b>Name:</b></label>
+        <input type="text" name="Name" id="Name" required>
+        <label for="name"><b>Age:</b></label>
+        <input type="number" name="age" id="age" required>
+        <div>
+            <b>Address</b><br>
+            <label for="street">Street:</label>
+            <input name="street" id="street" required>
+            <label for="city">City:</label>
+            <input name="city" id="city" required>
+            <label for="state">State:</label>
+            <input name="state" id="state" required>
+            <label for="county">Country:</label>
+            <input name="country" id="country" required>
+        </div>
+        <div>
+            <b>Languages Known</b><br>
+            <input id="lang" placeholder="lang1" required>
+            <input type="checkbox" id="read" name="lang1_proficiency" value="read">
+            <label for="read"> Read</label>
+            <input type="checkbox" id="write" name="lang1_proficiency" value="write">
+            <label for="write"> Write</label>
+            <input type="checkbox" id="speak" name="lang1_proficiency" value="speak">
+            <label for="speak"> Speak</label><br>
+            <input id="lang" placeholder="lang2">
+            <input type="checkbox" id="read" name="lang2_proficiency" value="read">
+            <label for="read"> Read</label>
+            <input type="checkbox" id="write" name="lang2_proficiency" value="write">
+            <label for="write"> Write</label>
+            <input type="checkbox" id="speak" name="lang2_proficiency" value="speak">
+            <label for="speak"> Speak</label><br>
+            <input id="lang" placeholder="lang3">
+            <input type="checkbox" id="read" name="lang3_proficiency" value="read">
+            <label for="read"> Read</label>
+            <input type="checkbox" id="write" name="lang3_proficiency" value="write">
+            <label for="write"> Write</label>
+            <input type="checkbox" id="speak" name="lang3_proficiency" value="speak">
+            <label for="speak"> Speak</label><br>     
+        </div>
+        <button type="submit">submit</button>
+    </form><br>
+    <table id="main">
+            <thead>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>languages Known</th>
+            </thead>
+        </table>
+    </div>
+    <script>
+    var peopleCnt = 0
+    function Person(name,age,street,city,state,country,langs){
+        this.name = name
+        this.age = age
+        this.address = {
+            street:street,
+            city:city,
+            state:state,
+            country:country
+        }
+        this.languagesKnown = langs
+    }
+    //extracting individual key value pairs of nested objects and listing items in Arrays
+    function printProps(space,obj){
+        if(typeof obj != 'object')return obj
+        var result=""
+        if(obj instanceof Array){
+            result+="<ul>"
+            for(let item of obj){
+                if(typeof item == 'object'){
+                    result+="<li>"+printProps(space,item)+"</li>"
+                }
+                else result += space+"<li>"+item+"</li>"
+            }
+            result+="</ul>"
+        }
+        else{
+        for(let prop in obj){
+            if(typeof obj[prop] == 'object'){
+                result += space+prop+":"+"<br>"
+                result +=printProps(space,obj[prop])+"<br>"
+            }
+            else result += space+prop+": "+obj[prop]+"<br>"
+        }
+    }
+    return result
+    }
+    function addPerson(e){
+        e.preventDefault()
+        var form = e.target
+        const {}  = form
+        var langs_known=[]
+        for(let l=1;l<=3;l++){
+            var lang_known = lang[l-1]
+            if(lang_known.value!=""){
+            var lang_details = {}
+            lang_details[lang_known.value] = {proficiency:[]}
+            for(let p of form[`lang${l}_proficiency`]){
+                if(p.checked)lang_details[lang_known.value].proficiency.push(p.value)
+            }
+            langs_known.push(lang_details)
+        }}
+        var person = new Person(Name.value,age.value,street.value,city.value,state.value,country.value,langs_known)
+        peopleCnt+=1
+        var mainDoc = document.getElementById('main')
+        mainDoc.innerHTML+=`
+            <tr id="item${peopleCnt}"></tr>`
+        var itemDoc = document.querySelectorAll(`#item${peopleCnt}`)[0]
+        for(let prop in person){
+            var item = `<td>${printProps("",person[prop])}</td>`
+            itemDoc.innerHTML += item
+        }
+        form.reset()
+    }
+    </script>
+</body>
+</html>
